@@ -31,20 +31,58 @@ footer{padding:24px 0 38px;color:var(--muted);font-size:12px}
 <div class="wrap">
 <div class="topline"><strong>广告候选判断模块 / 替代评估</strong><span>B0HHDR4K26 · 2026-10-12 · UTC</span></div>
 <h1>目前不能用 Jev 替代 Agent 判断</h1>
-<p class="lead"><span class="verdict">结论：不启用替代，不启用免审。</span>在这批 289 条对象上，直接判断版漏掉全部 9 条参考 promote；高召回筛选版虽保住这 9 条，却让 Agent 仍需判断 278 条。现有证据不支持可靠替代，也未证明端到端加速。</p>
+<p class="lead"><span class="verdict">最新结论：四问版已全量跑通，仍不启用替代或免审。</span>289 条对象、1,156 个是非问题全部取得有效回答。Jev 选出 18 条 promote，但只命中 Agent 的 9 条中的 2 条；另外 5 条被判 keep。相对参考判断，召回与匹配仍不足；没有证明端到端加速。</p>
 <p class="scope">评估对象：候选对象的 promote / keep / diagnostic 语义判断。不是出价金额计算、动作执行或广告效果评估。冻结数据窗：2026-10-04 至 2026-10-10；试验日期：2026-10-10、2026-10-12。</p>
-<nav aria-label="报告目录"><a href="#decision">结论依据</a><a href="#direct">直接判断</a><a href="#screen">筛选尝试</a><a href="#cases">9 条关键分歧</a><a href="#time">耗时</a><a href="#limits">边界与处置</a><a href="#sources">证据索引</a></nav>
+<nav aria-label="报告目录"><a href="#decision">结论依据</a><a href="#binary">最新四问版</a><a href="#binary-cases">四问原始分数</a><a href="#direct">旧直接判断</a><a href="#screen">筛选尝试</a><a href="#cases">历史分歧</a><a href="#time">耗时</a><a href="#limits">边界与处置</a><a href="#sources">证据索引</a></nav>
 </div>
 </header>
 <main class="wrap">
 <section id="decision">
-<div class="section-head"><h2>替代的两条路径，都未通过</h2><span class="eyebrow">模块级部署结论，不是模型能力上限证明</span></div>
+<div class="section-head"><h2>四问版有变化，但尚不能替代</h2><span class="eyebrow">最新全量结果 · 2026-10-12 11:50 UTC</span></div>
 <div class="metrics">
-<div class="metric"><div class="number">0 / 9</div><strong>直接判断版 promote 召回</strong><p>相对封存的 Agent 判断，9 条全部被 Jev 判为 keep。[1–3]</p></div>
-<div class="metric"><div class="number">278 / 289</div><strong>筛选版仍需 Agent 看</strong><p>仅提出跳过 11 条，占 3.81%；不是已经启用的减负。[4–6]</p></div>
-<div class="metric"><div class="number">0 秒</div><strong>shadow 实际节省</strong><p>全部对象仍有 Agent 判断；没有测得混合流程净加速。[6]</p></div>
+<div class="metric"><div class="number">2 / 9</div><strong>四问版 promote 召回</strong><p>命中 case_174、case_183；另 5 keep、1 diagnostic、1 并列回退。[8–11]</p></div>
+<div class="metric"><div class="number">2 / 18</div><strong>Jev promote 与参考匹配</strong><p>其余 16 条：Agent 11 keep、5 diagnostic。11.11% 是参考匹配率，不是业务准确率。[11]</p></div>
+<div class="metric"><div class="number">0 秒</div><strong>shadow 实际节省</strong><p>仍保留全部 Agent 判断；没有匹配混合流程的净加速测量。[11]</p></div>
 </div>
-<div class="note"><p><strong>判断标准：</strong>替代必须兼顾关键干预的可靠保留和实际工作量下降。现有直接判断结果在前者失败，筛选结果在后者失败。因此当前不具备启用替代的依据。</p></div>
+<div class="note"><p><strong>判断标准：</strong>替代必须可靠识别需要干预的对象，而不只是得到较高整体一致率。旧直接版 0/9，新四问版 2/9；筛选版保住历史 9 条，却仍转交 278 条。因此目前仍不具备启用替代的依据，但也不能据此证明模型在所有任务上的能力上限。</p></div>
+</section>
+<section id="binary">
+<h2>最新试验：四个是非问题，取最高 P(yes)</h2>
+<p>对每个对象分别问：需要 promote 吗、需要 keep 吗、需要 diagnostic 吗、需要交回 Agent 吗？每问只有 yes / no。保留四个原始 P(yes)，选择唯一最高者；最高分并列返回 needs_agent，不额外加阈值，不跨问题归一化。四问可共享一个请求，不是四次独立模型运行。[8、9]</p>
+<p>重新封存 Agent 的 289 条逐 ID 判断，再请求 Jev。逐对象核验确认：与旧直接版的业务事实及所加载政策完全一致（289/289）；两方使用相同保存的 campaign-scoped 输入，不是完整账户所有资料。问题格式及路由表述有变化，因此不是“只换格式”的因果实验。[11]</p>
+<div class="table-scroll"><table><thead><tr><th>指标</th><th>结果</th><th>口径</th></tr></thead><tbody>
+<tr><td>请求与有效覆盖</td><td class="good">173 / 173 批；289 / 289 对象</td><td>1,156 个二元回答全部通过校验；0 超限、0 传输回退，无重试</td></tr>
+<tr><td>新 Agent 参考</td><td>267 keep · 13 diagnostic · 9 promote</td><td>逐 ID authored reason；脚本仅按标识写回，不按指标批量分类</td></tr>
+<tr><td>Jev 最终选择</td><td>236 keep · 26 diagnostic · 18 promote · 9 needs_agent</td><td>9 个 needs_agent 中有 3 个最高分并列回退，其余 6 个选中弃权问题</td></tr>
+<tr><td>对新参考的一致率</td><td>231 / 280 = 82.50%</td><td>280 条非弃权回答；49 分歧、9 弃权。全队列口径 231/289 = 79.93%</td></tr>
+<tr><td>对旧固定参考</td><td>230 / 289 = 79.58%</td><td>避免把 Agent 的标签变化误认成 Jev 改善；非弃权口径 230/280 = 82.14%</td></tr>
+<tr><td>promote 召回 / 参考匹配</td><td class="bad">2 / 9（22.22%） / 2 / 18（11.11%）</td><td>相对 Agent 参考，不是盲审准确率；没有验证其余 16 条在业务上必然错误</td></tr>
+<tr><td>历史 9 条留给后续处理</td><td>4 / 9（44.44%）</td><td>2 promote + 1 diagnostic + 1 并列回退；5 keep 仍会漏留</td></tr>
+<tr><td>历史全部非 keep 保留</td><td>13 / 25（52%）</td><td>转交不等于判断正确；新参考口径为 12/22 = 54.55%</td></tr>
+</tbody></table></div>
+<div class="table-scroll"><table><caption class="small">四问版混淆矩阵：新 Agent 参考 × Jev 汇总选择，含弃权共 289 条</caption><thead><tr><th>Agent</th><th class="numeric">Jev keep</th><th class="numeric">diagnostic</th><th class="numeric">promote</th><th class="numeric">needs_agent</th><th class="numeric">合计</th></tr></thead><tbody>
+<tr><td>keep</td><td class="numeric">226</td><td class="numeric">22</td><td class="numeric">11</td><td class="numeric">8</td><td class="numeric">267</td></tr>
+<tr><td>diagnostic</td><td class="numeric">5</td><td class="numeric">3</td><td class="numeric">5</td><td class="numeric">0</td><td class="numeric">13</td></tr>
+<tr><td>promote</td><td class="numeric bad">5</td><td class="numeric">1</td><td class="numeric">2</td><td class="numeric">1</td><td class="numeric">9</td></tr>
+</tbody></table></div>
+<details><summary>Agent 为什么有 3 条标签变化？</summary><p>旧参考 264 keep / 16 diagnostic / 9 promote，新参考 267 / 13 / 9；promote 的九个 ID 完全不变。<code>case_73</code> 与 <code>case_80</code> 各 12 点击、低花费且只有部分观察日期，本轮选择继续采样，不把具体事实获取当成现在必需的前置任务。<code>case_209</code> 的弱 ROS 信号与已定位 Small Broad 问题重叠，本轮保留 placement，让局部 target 控制及 material PP 诊断承担本轮处理。三条都从 diagnostic 改为 keep；历史暴露已披露，不是盲审。</p></details>
+<p class="small"><strong>结论：</strong>四问版不再一味选 keep，但错配转移到更多 diagnostic / promote。一次全量运行不能证明稳定性，未测同输入重复、选项顺序或留出 ASIN；不能为追求 match 再按已知答案改阈值或重跑择优。</p>
+</section>
+<section id="binary-cases">
+<h2>九条参考 promote：四个原始分数</h2>
+<p class="small">下表是每问的 P(yes)，不要求相加为 1，也不是四分类校准置信度。最终选择严格取最大值；不是 promote 回答 yes 就自动 promote。Agent 对九条全部仍判 promote。[9、11]</p>
+<div class="table-scroll"><table><thead><tr><th>对象</th><th class="numeric">promote</th><th class="numeric">keep</th><th class="numeric">diagnostic</th><th class="numeric">needs_agent</th><th>Jev 汇总</th></tr></thead><tbody>
+<tr><td><code>case_62</code> Tabletop Exact</td><td class="numeric">0.58</td><td class="numeric">0.60</td><td class="numeric">0.56</td><td class="numeric">0.44</td><td class="bad">keep</td></tr>
+<tr><td><code>case_70</code> Auto Substitutes</td><td class="numeric">0.40</td><td class="numeric">0.75</td><td class="numeric">0.61</td><td class="numeric">0.47</td><td class="bad">keep</td></tr>
+<tr><td><code>case_99</code> Small Broad</td><td class="numeric">0.57</td><td class="numeric">0.61</td><td class="numeric">0.65</td><td class="numeric">0.55</td><td>diagnostic</td></tr>
+<tr><td><code>case_155</code> Auto Loose</td><td class="numeric">0.67</td><td class="numeric">0.54</td><td class="numeric">0.67</td><td class="numeric">0.51</td><td>needs_agent（最高分并列）</td></tr>
+<tr><td><code>case_157</code> Small Lights Exact</td><td class="numeric">0.50</td><td class="numeric">0.63</td><td class="numeric">0.59</td><td class="numeric">0.45</td><td class="bad">keep</td></tr>
+<tr><td><code>case_165</code> Small Broad</td><td class="numeric">0.44</td><td class="numeric">0.67</td><td class="numeric">0.53</td><td class="numeric">0.49</td><td class="bad">keep</td></tr>
+<tr><td><code>case_166</code> Prelit Broad</td><td class="numeric">0.43</td><td class="numeric">0.68</td><td class="numeric">0.45</td><td class="numeric">0.51</td><td class="bad">keep</td></tr>
+<tr><td><code>case_174</code> Auto Loose</td><td class="numeric">0.67</td><td class="numeric">0.56</td><td class="numeric">0.65</td><td class="numeric">0.47</td><td class="good">promote</td></tr>
+<tr><td><code>case_183</code> Auto Substitutes</td><td class="numeric">0.76</td><td class="numeric">0.45</td><td class="numeric">0.39</td><td class="numeric">0.45</td><td class="good">promote</td></tr>
+</tbody></table></div>
+<div class="note"><p><strong>接口现象：</strong><code>case_62</code> 对 promote 与 keep 都给出大于 0.5 的 yes 分数，最终 keep 仅高 0.02；<code>case_155</code> 的 promote 与 diagnostic 同为 0.67，按预先定义的并列规则回退。四个独立问题可能同时赞成多个互斥路径，argmax 本身不能保证语义一致或稳定。这里不是缺少后续 bid 金额，也不能从这些分数推断模型“心里的理由”。</p></div>
 </section>
 <section id="direct">
 <h2>直接判断：91.35% 一致率掩盖关键漏判</h2>
@@ -97,15 +135,15 @@ footer{padding:24px 0 38px;color:var(--muted);font-size:12px}
 </section>
 <section id="time">
 <h2>耗时：请求更快，不等于流程更快</h2>
-<div class="table-scroll"><table><thead><tr><th>阶段</th><th class="numeric">直接判断版</th><th class="numeric">筛选版</th><th>测量口径</th></tr></thead><tbody>
-<tr><td>筛选任务输入准备</td><td class="numeric">未纳入独立计时</td><td class="numeric">173.47 秒</td><td>前一轮完成的新 workload 准备</td></tr>
-<tr><td>Agent 阅读 / 判断 / 写入区间</td><td class="numeric">226.45 秒</td><td class="numeric">637.67 秒</td><td>不同任务；后者包含检查、写入与恢复会话，不是纯推理时间</td></tr>
-<tr><td>Jev 本地请求准备</td><td class="numeric">126.84 秒</td><td class="numeric">89.95 秒</td><td>helper 内的 packet preparation</td></tr>
-<tr><td>Jev 判断请求墙钟</td><td class="numeric">103.43 秒</td><td class="numeric">100.86 秒</td><td>并发后的墙钟，不是各请求时长相加</td></tr>
-<tr><td>Jev helper 总墙钟</td><td class="numeric">230.61 秒</td><td class="numeric">191.04 秒</td><td>含请求准备和判断，不含后续 Agent fallback / audit</td></tr>
-<tr><td>真实节省</td><td class="numeric">0 秒</td><td class="numeric">0 秒</td><td>均为 shadow；没有免审，也未测同任务混合流程</td></tr>
+<div class="table-scroll"><table><thead><tr><th>阶段</th><th class="numeric">旧直接版</th><th class="numeric">筛选版</th><th class="numeric">新四问版</th><th>测量口径</th></tr></thead><tbody>
+<tr><td>新 workload 准备</td><td class="numeric">未纳入独立计时</td><td class="numeric">173.47 秒</td><td class="numeric">178.65 秒</td><td>封存共同输入的独立准备步骤</td></tr>
+<tr><td>Agent 阅读 / 判断 / 写入区间</td><td class="numeric">226.45 秒</td><td class="numeric">637.67 秒</td><td class="numeric">404.22 秒</td><td>包含读取、检查、理由写入；不是纯推理耗时，历史暴露及任务表述也不同</td></tr>
+<tr><td>Jev 本地请求准备</td><td class="numeric">126.84 秒</td><td class="numeric">89.95 秒</td><td class="numeric">110.44 秒</td><td>helper 内重新准备并核验 packet</td></tr>
+<tr><td>Jev 判断请求墙钟</td><td class="numeric">103.43 秒</td><td class="numeric">100.86 秒</td><td class="numeric">123.27 秒</td><td>并发后墙钟；新四问版含真实首批容量预检，成功回答复用</td></tr>
+<tr><td>Jev helper 总墙钟</td><td class="numeric">230.61 秒</td><td class="numeric">191.04 秒</td><td class="numeric">234.07 秒</td><td>含请求准备与判断，不含后续人工/Agent fallback、审计或本 HTML 生成</td></tr>
+<tr><td>真实节省</td><td class="numeric">0 秒</td><td class="numeric">0 秒</td><td class="numeric">0 秒</td><td>均为 shadow，完整 Agent 判断仍然进行；未测同任务替代流程</td></tr>
 </tbody></table></div>
-<p class="small">不能用 101 秒 Jev 请求时间除以 638 秒 Agent 区间来宣称加速。输入准备、fallback、审计、验证与输出都需要计入同任务端到端测量；这份测量尚不存在。[1、2、6]</p>
+<p class="small">不能用请求时间除以 Agent 区间宣称流程加速。四问版请求墙钟较旧直接版增加 19.84 秒，但同时改变了题目表述，不能将差值纯归因于四问。输入准备、fallback、审计、验证与输出都需要计入同任务端到端测量；这份测量尚不存在。[1、2、6、11]</p>
 </section>
 <section id="limits">
 <h2>证据支持什么，以及不支持什么</h2>
@@ -124,19 +162,23 @@ footer{padding:24px 0 38px;color:var(--muted);font-size:12px}
 </ul></div>
 </div>
 <p class="small">新版 Agent 在读取本轮预测前封存全部逐 ID 判断，但已接触历史 Agent / Jev 结果，并非盲审。输入一致证明的是声明的业务决策输入一致，不是两种模型的系统提示、隐含知识或推理机制一致。</p>
-<div class="note"><p><strong>当前处置：</strong>恢复直接 choice：<code>promote_execute</code>（进入动作制定）、<code>keep_candidate</code>（保留或等待）、<code>route_to_diagnostic</code>（核实具体事实）、<code>needs_agent</code>（弃权交回）。Jev 仅保留 shadow，不启用自动接受或 Agent 免审；金额、风险与执行仍归 Agent。</p><p>这份 HTML 是隔离实验评估，不是广告 pipeline 的 Phase C。生成报告没有写 A*、审批、动作状态或观察计划，也没有额外调用 Jev。</p></div>
+<div class="note"><p><strong>当前处置：</strong>Jev shadow 已恢复，新全量实验使用四个 yes/no 问题及最高 P(yes) 汇总；仍保持 <code>promote_execute</code>（进入动作制定）、<code>keep_candidate</code>（保留或等待）、<code>route_to_diagnostic</code>（核实具体事实）、<code>needs_agent</code>（弃权交回）原有含义。不启用自动接受或 Agent 免审；金额、风险与执行仍归 Agent。旧单题四选项仅保留复现。</p><p>这份 HTML 是隔离实验评估，不是广告 pipeline 的 Phase C。本次新增一次四问版全量 Jev 试验，没有写 A*、审批、动作状态或观察计划，未为得到更高 match 进行择优重试。</p></div>
 </section>
 <section id="sources">
 <h2>证据索引</h2>
-<p class="small">原始业务 JSON 保留在本地，未公开上传。下列封存试验标识供审计追溯；报告仅公开汇总结果，不包含凭证，无外部脚本、字体或图片。</p>
+<p class="small">下列索引对应本地封存试验。公网仅发布本 HTML 评估，不上传原始业务 JSON、完整工作区或凭证；无外部脚本、字体、图片或网络请求。</p>
 <ol class="sources">
-<li>[1] <span>直接判断 Agent 参考 · 289 条（本地封存，未公开）</span><span class="hash">Evidence SHA-256: 1c938f2f0cb6523d06ca2a03fc4bdf94719994af3e2d79140c90a414f50ab504</span></li>
-<li>[2] <span>直接判断 Jev 全量结果（本地封存，未公开）</span> · 289 有效回答</li>
-<li>[3] <span>直接判断封存对比（本地封存，未公开）</span> · 264 agree / 25 disagree</li>
-<li>[4] <span>高召回筛选 Agent 参考 · 289 条（本地封存，未公开）</span><span class="hash">Evidence SHA-256: c2ba66839b1aaac502ebb8239a9e795a493a248c16d62367792eecdbf7782a5c</span></li>
-<li>[5] <span>高召回筛选 Jev 全量结果（本地封存，未公开）</span> · 287 有效 / 2 fallback</li>
-<li>[6] <span>筛选评估与历史 promote 召回核验（本地封存，未公开）</span> · 289 条事实及政策逐条一致核验、筛选工作量、计时</li>
-<li>[7] <span>0.70 分数门槛补充评估（本地封存，未公开）</span> · raw / guarded 均没有可跳过条目</li>
+<li>[1] <span>直接判断 Agent 参考 · 289 条（原始证据留在本地，未公开上传）</span><span class="hash">Evidence SHA-256: 1c938f2f0cb6523d06ca2a03fc4bdf94719994af3e2d79140c90a414f50ab504</span></li>
+<li>[2] <span>直接判断 Jev 全量结果（原始证据留在本地，未公开上传）</span> · 289 有效回答</li>
+<li>[3] <span>直接判断封存对比（原始证据留在本地，未公开上传）</span> · 264 agree / 25 disagree</li>
+<li>[4] <span>高召回筛选 Agent 参考 · 289 条（原始证据留在本地，未公开上传）</span><span class="hash">Evidence SHA-256: c2ba66839b1aaac502ebb8239a9e795a493a248c16d62367792eecdbf7782a5c</span></li>
+<li>[5] <span>高召回筛选 Jev 全量结果（原始证据留在本地，未公开上传）</span> · 287 有效 / 2 fallback</li>
+<li>[6] <span>筛选评估与历史 promote 召回核验（原始证据留在本地，未公开上传）</span> · 289 条事实及政策逐条一致核验、筛选工作量、计时</li>
+<li>[7] <span>0.70 分数门槛补充评估（原始证据留在本地，未公开上传）</span> · raw / guarded 均没有可跳过条目</li>
+<li>[8] <span>四问版独立 Agent 参考 · 289 条（原始证据留在本地，未公开上传）</span><span class="hash">Evidence SHA-256: 0f1f6910882bd75f3b919c8f3d9fe95166d0a5bda4edb63e4d752a363ae06164</span></li>
+<li>[9] <span>四问版 Jev 全量结果及原始二元分数（原始证据留在本地，未公开上传）</span> · 173 批有效 / 289 条有效 / 1,156 问</li>
+<li>[10] <span>四问版封存对比（原始证据留在本地，未公开上传）</span> · 231 agree / 49 disagree / 9 abstain</li>
+<li>[11] <span>四问版汇总、固定参考对比及输入一致性核验（原始证据留在本地，未公开上传）</span> · 289 条逐 ID 事实/政策一致，3 条 Agent 标签漂移</li>
 </ol>
 </section>
 </main>
