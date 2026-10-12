@@ -1,0 +1,146 @@
+<!DOCTYPE html><html lang="zh-CN"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>Jev 模块替代评估 · B0HHDR4K26</title>
+<style>
+:root{--ink:#202828;--muted:#596565;--line:#dce3e1;--paper:#fff;--bg:#f5f7f6;--red:#a62e3c;--green:#25705b;--blue:#286483;--amber:#866519}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.7 system-ui,-apple-system,"Segoe UI","Microsoft YaHei",sans-serif;letter-spacing:0}
+a{color:var(--blue);text-underline-offset:3px}a:focus-visible,summary:focus-visible{outline:3px solid var(--blue);outline-offset:4px}
+header{background:var(--paper);border-bottom:1px solid var(--line)}.wrap{max-width:1120px;margin:auto;padding:0 32px}.topline{padding-top:28px;display:flex;justify-content:space-between;gap:16px;color:var(--muted);font-size:13px}
+h1{font-size:34px;line-height:1.35;margin:28px 0 14px;font-weight:720}h2{font-size:23px;line-height:1.4;margin:0 0 14px}h3{font-size:17px;margin:0 0 8px}p{margin:10px 0}
+.lead{max-width:890px;font-size:17px}.verdict{color:var(--red);font-weight:700}.scope{color:var(--muted);font-size:13px;padding-bottom:20px}
+nav{display:flex;flex-wrap:wrap;gap:22px;padding:15px 0 20px;font-size:13px}nav a{text-decoration:none}
+main section{padding:34px 0;border-bottom:1px solid var(--line);scroll-margin-top:16px}
+.section-head{display:flex;align-items:baseline;justify-content:space-between;gap:16px}.eyebrow{font-size:12px;font-weight:650;color:var(--muted)}
+.metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;margin:20px 0 12px}.metric{border-top:3px solid var(--red);padding-top:12px}.metric:nth-child(2){border-color:var(--blue)}.metric:nth-child(3){border-color:var(--green)}
+.number{font-size:38px;font-weight:730;line-height:1.2;font-variant-numeric:tabular-nums}.metric p{font-size:13px;color:var(--muted)}.small{font-size:13px;color:var(--muted)}
+.columns{display:grid;grid-template-columns:1fr 1fr;gap:36px}.note{border-left:3px solid var(--amber);padding:2px 0 2px 16px;margin:20px 0}.note p{margin:6px 0}.bad{color:var(--red);font-weight:650}.good{color:var(--green);font-weight:650}
+.table-scroll{overflow-x:auto;margin:16px 0;border:1px solid var(--line);border-radius:4px;background:var(--paper)}table{border-collapse:collapse;width:100%;min-width:640px;font-size:14px}th,td{padding:12px 16px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}th{background:#edf2f0;font-size:12px;color:var(--muted);font-weight:650}tr:last-child td{border-bottom:0}.numeric{text-align:right;font-variant-numeric:tabular-nums}code{font:12px/1.6 ui-monospace,SFMono-Regular,Consolas,monospace;overflow-wrap:anywhere}
+.legend{display:flex;gap:18px;flex-wrap:wrap;font-size:12px;color:var(--muted);margin:16px 0}.legend span:before{content:"";display:inline-block;width:10px;height:10px;margin-right:6px;background:var(--green)}.legend .diagnostic:before{background:var(--blue)}.legend .promote:before{background:var(--red)}.legend .fallback:before{background:var(--amber)}
+.chart-row{display:grid;grid-template-columns:100px 1fr;gap:14px;align-items:center;margin:15px 0;font-size:13px}.bar{display:flex;height:28px;background:#e7eeeb;overflow:hidden;border-radius:2px}.bar i{height:100%;display:block;background:var(--green)}.bar .diagnostic{background:var(--blue)}.bar .promote{background:var(--red)}.bar .fallback{background:var(--amber)}
+.bar-label{font-size:12px;color:var(--muted);margin-left:114px}.timeline{list-style:none;padding:0;margin:0}.timeline li{padding:12px 0;border-bottom:1px solid var(--line)}.timeline strong{display:block}.timeline li:last-child{border:0}
+details{border-top:1px solid var(--line);padding:14px 0}summary{cursor:pointer;font-weight:650}ol,ul{padding-left:22px}li{margin:8px 0}.sources{font-size:13px}.sources li{overflow-wrap:anywhere}.hash{font-size:11px;color:var(--muted);display:block;margin:4px 0}
+footer{padding:24px 0 38px;color:var(--muted);font-size:12px}
+@media(max-width:700px){.wrap{padding:0 20px}.topline,.section-head{display:block}.topline span{display:block;margin-top:5px}h1{font-size:27px;margin-top:22px}.lead{font-size:16px}.metrics{grid-template-columns:1fr;gap:18px}.number{font-size:32px}.columns{grid-template-columns:1fr;gap:20px}main section{padding:28px 0}nav{gap:12px 18px}.chart-row{grid-template-columns:72px 1fr}.bar-label{margin-left:86px}}
+@media print{body{background:#fff;font-size:11px}.wrap{max-width:none;padding:0}header{border:0}nav{display:none}h1{font-size:25px}main section{padding:18px 0}.metrics{grid-template-columns:repeat(3,1fr)}.columns{grid-template-columns:1fr 1fr}.number{font-size:28px}.table-scroll{overflow:visible}table{min-width:0;font-size:10px}th,td{padding:6px 8px}a{color:inherit}details{break-inside:avoid}.bar{-webkit-print-color-adjust:exact;print-color-adjust:exact}footer{padding:12px 0}}
+</style>
+</head>
+<body>
+<header>
+<div class="wrap">
+<div class="topline"><strong>广告候选判断模块 / 替代评估</strong><span>B0HHDR4K26 · 2026-10-12 · UTC</span></div>
+<h1>目前不能用 Jev 替代 Agent 判断</h1>
+<p class="lead"><span class="verdict">结论：不启用替代，不启用免审。</span>在这批 289 条对象上，直接判断版漏掉全部 9 条参考 promote；高召回筛选版虽保住这 9 条，却让 Agent 仍需判断 278 条。现有证据不支持可靠替代，也未证明端到端加速。</p>
+<p class="scope">评估对象：候选对象的 promote / keep / diagnostic 语义判断。不是出价金额计算、动作执行或广告效果评估。冻结数据窗：2026-10-04 至 2026-10-10；试验日期：2026-10-10、2026-10-12。</p>
+<nav aria-label="报告目录"><a href="#decision">结论依据</a><a href="#direct">直接判断</a><a href="#screen">筛选尝试</a><a href="#cases">9 条关键分歧</a><a href="#time">耗时</a><a href="#limits">边界与处置</a><a href="#sources">证据索引</a></nav>
+</div>
+</header>
+<main class="wrap">
+<section id="decision">
+<div class="section-head"><h2>替代的两条路径，都未通过</h2><span class="eyebrow">模块级部署结论，不是模型能力上限证明</span></div>
+<div class="metrics">
+<div class="metric"><div class="number">0 / 9</div><strong>直接判断版 promote 召回</strong><p>相对封存的 Agent 判断，9 条全部被 Jev 判为 keep。[1–3]</p></div>
+<div class="metric"><div class="number">278 / 289</div><strong>筛选版仍需 Agent 看</strong><p>仅提出跳过 11 条，占 3.81%；不是已经启用的减负。[4–6]</p></div>
+<div class="metric"><div class="number">0 秒</div><strong>shadow 实际节省</strong><p>全部对象仍有 Agent 判断；没有测得混合流程净加速。[6]</p></div>
+</div>
+<div class="note"><p><strong>判断标准：</strong>替代必须兼顾关键干预的可靠保留和实际工作量下降。现有直接判断结果在前者失败，筛选结果在后者失败。因此当前不具备启用替代的依据。</p></div>
+</section>
+<section id="direct">
+<h2>直接判断：91.35% 一致率掩盖关键漏判</h2>
+<p>2026-10-10 全量试验，两方基于同一封存 evidence hash 分别判断 289 条。Jev 289 条全部取得有效回答，所以这里的分歧不能解释成传输失败。[1–3]</p>
+<div class="legend"><span>keep</span><span class="diagnostic">diagnostic</span><span class="promote">promote</span></div>
+<div role="img" aria-label="Agent 264 keep、16 diagnostic、9 promote；Jev 287 keep、2 diagnostic、0 promote">
+<div class="chart-row"><strong>Agent</strong><div class="bar"><i style="width:91.34948%"></i><i class="diagnostic" style="width:5.53633%"></i><i class="promote" style="width:3.11419%"></i></div></div>
+<div class="bar-label">264 keep · 16 diagnostic · 9 promote</div>
+<div class="chart-row"><strong>Jev</strong><div class="bar"><i style="width:99.30796%"></i><i class="diagnostic" style="width:.69204%"></i></div></div>
+<div class="bar-label">287 keep · 2 diagnostic · 0 promote</div>
+</div>
+<div class="table-scroll"><table>
+<caption class="small">直接判断混淆矩阵：行是 Agent 参考判断，列是 Jev 回答；总计 289 条</caption>
+<thead><tr><th>Agent 参考</th><th class="numeric">Jev keep</th><th class="numeric">Jev diagnostic</th><th class="numeric">Jev promote</th><th class="numeric">合计</th></tr></thead>
+<tbody><tr><td>keep</td><td class="numeric">263</td><td class="numeric">1</td><td class="numeric">0</td><td class="numeric">264</td></tr>
+<tr><td>diagnostic</td><td class="numeric bad">15</td><td class="numeric">1</td><td class="numeric">0</td><td class="numeric">16</td></tr>
+<tr><td>promote</td><td class="numeric bad">9</td><td class="numeric">0</td><td class="numeric">0</td><td class="numeric">9</td></tr></tbody>
+</table></div>
+<p><strong>整体一致：</strong>264 / 289 = 91.35%。但“全部选 keep”也会得到同样的一致率。Jev 留下的 2 条 diagnostic 中，只有 1 条属于参考需继续处理的 25 条；参考非 keep 保留率只有 <strong class="bad">1 / 25 = 4%</strong>。</p>
+<p class="small">这说明整体一致率不是这里的可靠替代指标，也不是广告判断准确率。未提供独立盲审 gold，Agent 参考并非已验证真值。</p>
+</section>
+<section id="screen">
+<h2>改成高召回筛选：保住候选，失去减负</h2>
+<p>2026-10-12 将问题改为“是否值得 Agent 继续调查”，而不是直接判断是否 promote。289 条逐对象业务事实及所加载政策与上一全量参考逐条验证一致；问题语义不同，因此不能把两轮 choice 一致率当成同任务提升。[4–6]</p>
+<div class="table-scroll"><table><thead><tr><th>指标</th><th>结果</th><th>解释</th></tr></thead><tbody>
+<tr><td>有效覆盖</td><td>287 / 289（99.31%）</td><td>173 批全部尝试；172 批成功，1 批回答校验失败，涉及 2 条</td></tr>
+<tr><td>Jev 回答分布</td><td>82 候选 · 194 diagnostic · 11 keep</td><td>另 2 条失败回退；候选不代表最终 promote</td></tr>
+<tr><td>历史最终 promote 保留</td><td class="good">9 / 9（100%）</td><td>跨任务召回评估，仅说明全部进入后续 Agent 队列</td></tr>
+<tr><td>新版 Agent 需看对象</td><td>56 / 57（98.25%）被保留</td><td>Agent 35 条干预候选 + 22 条 diagnostic，漏留 1 条</td></tr>
+<tr><td>名义工作量下降</td><td class="bad">11 / 289（3.81%）</td><td>剩余 Agent 队列 278 条；222 条参考 keep 也被转交</td></tr>
+<tr><td>加 0.70 keep 分数门槛</td><td>0 条可筛掉</td><td>探索性分数阈值，未经校准；更不构成免审许可 [7]</td></tr>
+</tbody></table></div>
+<div class="note"><p><strong>新增漏留：</strong><code>case_161 / disp_080</code>，Prelit Phrase 有 3 个高效订单且窗口后段流量下降。Agent 认为应检查分配与流量获取，Jev 判 keep。这是“值得继续看”的分歧，不是已经证实漏掉最终执行动作。</p></div>
+<p><strong>实际意义：</strong>放宽成筛选问题解决了历史 9 条的漏留，但把绝大多数对象交回 Agent。没有实现“Jev 找出值得 promote 的少数对象，其余免看”。</p>
+</section>
+<section id="cases">
+<h2>9 条关键对象：直接版全部 keep</h2>
+<p class="small">以下诊断来自封存 Agent 参考理由；不是由报表脚本按阈值生成的动作，也不是经过业务结果验证的正确答案。筛选版的“候选”仅表示转交 Agent。[1、2、6]</p>
+<div class="table-scroll"><table><thead><tr><th>对象</th><th>观察信号与 Agent 理由</th><th>直接版 Jev</th><th>筛选版 Jev</th></tr></thead><tbody>
+<tr><td><code>case_62</code><br>Tabletop Exact</td><td>28 点击、$12.62、0 单；参考支持小步可回撤降 bid，而非停投。</td><td class="bad">keep</td><td>候选</td></tr>
+<tr><td><code>case_70</code><br>Auto substitutes</td><td>21 点击、0 单；close / loose 合计 8 单，参考倾向局部收缩弱流量入口。</td><td class="bad">keep</td><td>候选</td></tr>
+<tr><td><code>case_99</code><br>Small-tree Broad</td><td>68 点击、$27.66、1 单；参考支持小步成本控制，不把 ACoS 当稳定结论。</td><td class="bad">keep</td><td>候选</td></tr>
+<tr><td><code>case_155</code><br>Loose match</td><td>103 点击、$31.92、1 单；参考认为其拖累上级效率，局部降 bid 保留入口。</td><td class="bad">keep</td><td>候选</td></tr>
+<tr><td><code>case_157</code><br>Small lights Exact</td><td>22 点击、0 单；同组 tabletop 转化 3 单，参考倾向保护赢家、局部控成本。</td><td class="bad">keep</td><td>候选</td></tr>
+<tr><td><code>case_165</code><br>Small Broad</td><td>30 点击、$10.24、0 单；mini / lighted 同级转化，参考支持局部收缩。</td><td class="bad">keep</td><td>候选</td></tr>
+<tr><td><code>case_166</code><br>Prelit Broad</td><td>28 点击、$9.85、0 单；参考支持可回撤降 bid，不停有转化的同级对象。</td><td class="bad">keep</td><td>候选</td></tr>
+<tr><td><code>case_174</code><br>Loose match</td><td>119 点击、$39.80、1 单；参考倾向局部降 bid，而非暂停整个 campaign。</td><td class="bad">keep</td><td>候选</td></tr>
+<tr><td><code>case_183</code><br>Auto substitutes</td><td>52 点击、$19.35、1 单；弱于 close / loose，同样倾向局部收缩。</td><td class="bad">keep</td><td>候选</td></tr>
+</tbody></table></div>
+</section>
+<section id="time">
+<h2>耗时：请求更快，不等于流程更快</h2>
+<div class="table-scroll"><table><thead><tr><th>阶段</th><th class="numeric">直接判断版</th><th class="numeric">筛选版</th><th>测量口径</th></tr></thead><tbody>
+<tr><td>筛选任务输入准备</td><td class="numeric">未纳入独立计时</td><td class="numeric">173.47 秒</td><td>前一轮完成的新 workload 准备</td></tr>
+<tr><td>Agent 阅读 / 判断 / 写入区间</td><td class="numeric">226.45 秒</td><td class="numeric">637.67 秒</td><td>不同任务；后者包含检查、写入与恢复会话，不是纯推理时间</td></tr>
+<tr><td>Jev 本地请求准备</td><td class="numeric">126.84 秒</td><td class="numeric">89.95 秒</td><td>helper 内的 packet preparation</td></tr>
+<tr><td>Jev 判断请求墙钟</td><td class="numeric">103.43 秒</td><td class="numeric">100.86 秒</td><td>并发后的墙钟，不是各请求时长相加</td></tr>
+<tr><td>Jev helper 总墙钟</td><td class="numeric">230.61 秒</td><td class="numeric">191.04 秒</td><td>含请求准备和判断，不含后续 Agent fallback / audit</td></tr>
+<tr><td>真实节省</td><td class="numeric">0 秒</td><td class="numeric">0 秒</td><td>均为 shadow；没有免审，也未测同任务混合流程</td></tr>
+</tbody></table></div>
+<p class="small">不能用 101 秒 Jev 请求时间除以 638 秒 Agent 区间来宣称加速。输入准备、fallback、审计、验证与输出都需要计入同任务端到端测量；这份测量尚不存在。[1、2、6]</p>
+</section>
+<section id="limits">
+<h2>证据支持什么，以及不支持什么</h2>
+<div class="columns">
+<div><h3>可以支持的结论</h3><ul>
+<li>当前 Jev 集成不具备替代这个广告判断模块的可靠性证据。</li>
+<li>同一封存输入下，直接判断的关键少数类别与 Agent 参考存在系统性分歧。</li>
+<li>换成高召回筛选，仍未同时获得可靠保留和显著减负。</li>
+<li>业务事实与所加载政策已对齐，不能简单将剩余分歧都解释为已知字段遗漏。</li>
+</ul></div>
+<div><h3>不能据此证明的结论</h3><ul>
+<li>不能证明 Jev 在所有产品、窗口或任务上永远不行。</li>
+<li>不能证明所有分歧都源自模型能力，而非任务接口、表述或上下文利用方式。</li>
+<li>不能把 Agent（用户称 6.1-sol）的参考判断当作盲审真值；本地 artifact 也不独立验证其模型身份。</li>
+<li>没有独立 gold、广告结果回测或匹配混合流程耗时；选定分歧对象是开发样本，不是留出集。</li>
+</ul></div>
+</div>
+<p class="small">新版 Agent 在读取本轮预测前封存全部逐 ID 判断，但已接触历史 Agent / Jev 结果，并非盲审。输入一致证明的是声明的业务决策输入一致，不是两种模型的系统提示、隐含知识或推理机制一致。</p>
+<div class="note"><p><strong>当前处置：</strong>恢复直接 choice：<code>promote_execute</code>（进入动作制定）、<code>keep_candidate</code>（保留或等待）、<code>route_to_diagnostic</code>（核实具体事实）、<code>needs_agent</code>（弃权交回）。Jev 仅保留 shadow，不启用自动接受或 Agent 免审；金额、风险与执行仍归 Agent。</p><p>这份 HTML 是隔离实验评估，不是广告 pipeline 的 Phase C。生成报告没有写 A*、审批、动作状态或观察计划，也没有额外调用 Jev。</p></div>
+</section>
+<section id="sources">
+<h2>证据索引</h2>
+<p class="small">原始业务 JSON 保留在本地，未公开上传。下列封存试验标识供审计追溯；报告仅公开汇总结果，不包含凭证，无外部脚本、字体或图片。</p>
+<ol class="sources">
+<li>[1] <span>直接判断 Agent 参考 · 289 条（本地封存，未公开）</span><span class="hash">Evidence SHA-256: 1c938f2f0cb6523d06ca2a03fc4bdf94719994af3e2d79140c90a414f50ab504</span></li>
+<li>[2] <span>直接判断 Jev 全量结果（本地封存，未公开）</span> · 289 有效回答</li>
+<li>[3] <span>直接判断封存对比（本地封存，未公开）</span> · 264 agree / 25 disagree</li>
+<li>[4] <span>高召回筛选 Agent 参考 · 289 条（本地封存，未公开）</span><span class="hash">Evidence SHA-256: c2ba66839b1aaac502ebb8239a9e795a493a248c16d62367792eecdbf7782a5c</span></li>
+<li>[5] <span>高召回筛选 Jev 全量结果（本地封存，未公开）</span> · 287 有效 / 2 fallback</li>
+<li>[6] <span>筛选评估与历史 promote 召回核验（本地封存，未公开）</span> · 289 条事实及政策逐条一致核验、筛选工作量、计时</li>
+<li>[7] <span>0.70 分数门槛补充评估（本地封存，未公开）</span> · raw / guarded 均没有可跳过条目</li>
+</ol>
+</section>
+</main>
+<footer class="wrap">结论适用范围：B0HHDR4K26 已测试的 289 条冻结对象与当前 Jev 接入方式。部署建议：不替代，保持 Agent 完整判断。报告日期 2026-10-12。</footer>
+
+
+</body></html>
